@@ -40,6 +40,7 @@ namespace Projeto_de_Teste
         [InlineData("André Gomes", "FGA-1325", "Preto", "Versa")]// InlineData passa os valores para os parâmetros do método que será testado
         [InlineData("Joao Macedo", "JKK-4564", "Prata", "Voiage")]
         [InlineData("Olivia Souza", "HUJ-5642", "Preto", "Onix")]
+        [InlineData("Jennyfer Cabral", "WER-7897", "Branco", "Amarok")]
 
         
         public void ValidaFaturamentoVariosVeiculos(string proprietario, string placa, string cor, string modelo)
