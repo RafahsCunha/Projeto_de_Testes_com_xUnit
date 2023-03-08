@@ -3,6 +3,7 @@ using Alura.Estacionamento.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -63,5 +64,56 @@ namespace Projeto_de_Teste
             //Assert
             Assert.Equal(2, faturamento);
         }
+
+        [Theory(DisplayName ="Teste nº 4")]
+        [InlineData("Rogerio Lisboa", "PYO-4566", "Vermelho", "Tiguan")]
+        public void ConsultaVeiculo(string proprietario, string placa, string cor, string modelo)
+        {
+            //Arrenge
+            var veiculo = new Veiculo();
+            veiculo.Proprietario = proprietario;
+            veiculo.Placa = placa;
+            veiculo.Cor = cor;
+            veiculo.Modelo = modelo;
+
+            var estacionamento = new Patio();
+            estacionamento.RegistrarEntradaVeiculo(veiculo);
+
+            //Act
+            var consulta = estacionamento.PesquisaVeiculo(placa);
+
+            //Assert
+            Assert.Equal(placa, consulta.Placa);
+        }
+
+        [Fact]
+        public void AlterarDadosVeiculo()
+        {
+            // Arrange
+            var veiculo = new Veiculo();
+            veiculo.Proprietario = "Roger Guedes";
+            veiculo.Placa = "QWE-7894";
+            veiculo.Cor = "Prata";
+            veiculo.Modelo = "Gol";
+            veiculo.Largura = 2.0;
+
+            Patio estacionamento = new Patio();
+            estacionamento.RegistrarEntradaVeiculo(veiculo);
+
+            var veiculoAlterado = new Veiculo();
+            veiculoAlterado.Proprietario = "Roger Matias";
+            veiculoAlterado.Placa = "QWE-7894";
+            veiculoAlterado.Cor = "Preto";
+            veiculoAlterado.Modelo = "Prisma";
+            veiculoAlterado.Largura = 2.5;
+
+            //Act 
+            Veiculo alterado = estacionamento.AlteraDadosVeiculo(veiculoAlterado);
+
+            //Assert
+            Assert.Equal(alterado.Placa, veiculoAlterado.Placa);
+
+        }
+
     }
 }
