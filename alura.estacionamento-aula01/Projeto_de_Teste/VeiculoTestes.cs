@@ -1,3 +1,4 @@
+using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using System;
@@ -46,5 +47,27 @@ namespace Projeto_de_Teste
         {
 
         }
+
+        [Fact]
+        public void DadosVeiculo()
+        {
+            //Arrenge
+
+            var carro = new Veiculo();
+            carro.Proprietario = "Rafael Geromel";
+            carro.Tipo = TipoVeiculo.Automovel;
+            carro.Placa = "ABS-3578";
+            carro.Cor = "Branco";
+            carro.Modelo = "T-Cross";
+
+            //Act
+
+            string dados = carro.ToString();
+
+            //Assert
+
+            Assert.Contains("Tipo do Veículo: ", dados);
+        }
+
     }
 }

@@ -87,7 +87,7 @@ namespace Projeto_de_Teste
         }
 
         [Fact]
-        public void AlterarDadosVeiculo()
+        public void AlteraDadosDoVeiculo()
         {
             // Arrange
             var veiculo = new Veiculo();
