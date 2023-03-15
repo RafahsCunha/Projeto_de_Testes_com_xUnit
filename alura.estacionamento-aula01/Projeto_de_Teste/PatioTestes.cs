@@ -7,19 +7,32 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Projeto_de_Teste
 {
     public class PatioTestes
     {
+
+        // Configuração do Setup - preparação do cenário de testes
+        private Patio estacionamento;
+        private Veiculo veiculo;
+        public ITestOutputHelper saidaDadosConcole;//atributo para mensagem de teste no gerenciador de testes 
+        public PatioTestes(ITestOutputHelper _saidaDadosConcole)//Construtor
+        {
+            this.saidaDadosConcole = _saidaDadosConcole;
+            saidaDadosConcole.WriteLine("Construtor Invocado!!!!");
+            estacionamento = new Patio();
+            veiculo = new Veiculo();
+        }
         [Fact]
-        public void ValidaFaturamento()
+        public void ValidaFaturamentoDoEstacionamento()
         {
             // Padrão AAA
 
             // Arrange
-            var estacionamento = new Patio();
-            var veiculo = new Veiculo();
+            //var estacionamento = new Patio();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = "Rafael Henrique";
             veiculo.Tipo = TipoVeiculo.Automovel;
             veiculo.Cor = "Prata";
@@ -44,16 +57,16 @@ namespace Projeto_de_Teste
         [InlineData("Jennyfer Cabral", "WER-7897", "Branco", "Amarok")]
 
         
-        public void ValidaFaturamentoVariosVeiculos(string proprietario, string placa, string cor, string modelo)
+        public void ValidaFaturamentoDeVariosVeiculos(string proprietario, string placa, string cor, string modelo)
         {
             //Arrenge
-            var veiculo = new Veiculo();
+           // var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Placa = placa;
             veiculo.Cor = cor;
             veiculo.Modelo = modelo;
 
-            var estacionamento = new Patio();
+            //var estacionamento = new Patio();
             estacionamento.RegistrarEntradaVeiculo(veiculo);
             estacionamento.RegistrarSaidaVeiculo(veiculo.Placa);
 
@@ -67,16 +80,16 @@ namespace Projeto_de_Teste
 
         [Theory(DisplayName ="Teste nº 4")]
         [InlineData("Rogerio Lisboa", "PYO-4566", "Vermelho", "Tiguan")]
-        public void ConsultaVeiculo(string proprietario, string placa, string cor, string modelo)
+        public void ConsultaVeiculoEstacionado(string proprietario, string placa, string cor, string modelo)
         {
             //Arrenge
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Placa = placa;
             veiculo.Cor = cor;
             veiculo.Modelo = modelo;
 
-            var estacionamento = new Patio();
+            //var estacionamento = new Patio();
             estacionamento.RegistrarEntradaVeiculo(veiculo);
 
             //Act
@@ -90,14 +103,14 @@ namespace Projeto_de_Teste
         public void AlteraDadosDoVeiculo()
         {
             // Arrange
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = "Roger Guedes";
             veiculo.Placa = "QWE-7894";
             veiculo.Cor = "Prata";
             veiculo.Modelo = "Gol";
             veiculo.Largura = 2.0;
 
-            Patio estacionamento = new Patio();
+            //Patio estacionamento = new Patio();
             estacionamento.RegistrarEntradaVeiculo(veiculo);
 
             var veiculoAlterado = new Veiculo();

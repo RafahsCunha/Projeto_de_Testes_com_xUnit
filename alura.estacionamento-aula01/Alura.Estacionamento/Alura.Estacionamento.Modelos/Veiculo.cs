@@ -107,7 +107,7 @@ namespace Alura.Estacionamento.Modelos
         public override string ToString() // Método ToString() sendo sobrescrito com o override, para retornar uma lista de dados do veículo
         {
             return $"Ficha do Veículo: \n" +
-                    $"Tipo do Veículo: {this.Tipo.ToString()}\n" +
+                    $"Tipo do Veículo: {this.Tipo}\n" +
                     $"Proprietário: {this.Proprietario}\n" +
                     $"Modelo: {this.Modelo}\n" +
                     $"Cor: {this.Cor}\n" +

@@ -3,6 +3,7 @@ using Alura.Estacionamento.Modelos;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using System;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Projeto_de_Teste
 {
@@ -19,11 +20,23 @@ namespace Projeto_de_Teste
          * Assert - Verificação do resultado obtido da execução do método. Ex.: resultado de Acelerar() Frear()
          **/
 
+
+        // linhas 24 até 29, Conceito de Setup - preparação do cenário de teste
+        private Veiculo veiculo;
+        public ITestOutputHelper saidaConsoleTeste; // ITestOutputHelper escreve uma mensagem no console do gerenciador de testes toda vez que algum método invoca o construtor
+        public VeiculoTestes(ITestOutputHelper _saidaConsoleTeste) // Construtor
+        {
+            this.saidaConsoleTeste = _saidaConsoleTeste;
+            saidaConsoleTeste.WriteLine("Construtor Invocado!!!");//Mensagem exibida no console do gerenciador de testes
+            veiculo = new Veiculo(); // Variável Global, substitui a necessidade de criar um objeto veiculo em cada método de teste
+        }
+
+
         [Fact(DisplayName =" Teste nº 1")] // Notação que indica um método de teste do pacote Xunit
         [Trait("Funcionalidade","Acelerar")]// Trait serve para descrever a característica do teste.... e funciona como uma chave valor, a orimeira string é a chave a segunda o valor
-        public void TestaAcelerar() // método de teste
+        public void TestaAcelerarComParametro10() // método de teste
         {
-            var veiculo = new Veiculo(); // Variável veículo sendo instanciada pela classe Veiculo
+            //var veiculo = new Veiculo(); // Variável veículo sendo instanciada pela classe Veiculo
             veiculo.Acelerar(10);// invocação do método Acelerar()
             Assert.Equal(100, veiculo.VelocidadeAtual);// Verifica se a propriedade VelocidadeAtual possui o valor 100
         }
@@ -31,10 +44,10 @@ namespace Projeto_de_Teste
         [Fact(DisplayName ="Teste nº 3")]
         [Trait("Funcionalidade","Frear")] // Vide a aba caracteriscitas no Gerenciador de Testes
         // Com padrão AAA
-        public void TestaFrear()
+        public void TestaFrearComParametro10()
         {
             //Arrange
-            var veiculo = new Veiculo();
+           // var veiculo = new Veiculo();
             //Act
             veiculo.Frear(10);
             //Assert
@@ -43,13 +56,13 @@ namespace Projeto_de_Teste
 
         // Skip Ignora um teste que ainda está sendo implementado e passa uma mensagem de aviso
         [Fact (DisplayName="Teste nº 2",Skip ="Teste ainda não implementado - ignorar!!!")] // Anotação para ignorar um teste que ainda não foi finalizado
-        public void ValidaNomeProprietario()
+        public void ValidaNomeDoProprietario()
         {
 
         }
 
         [Fact]
-        public void DadosVeiculo()
+        public void FichaDeDadosDoVeiculo()
         {
             //Arrenge
 
@@ -64,9 +77,9 @@ namespace Projeto_de_Teste
 
             string dados = carro.ToString();
 
-            //Assert
+            //Assert 
 
-            Assert.Contains("Tipo do Veículo: ", dados);
+            Assert.Contains("Placa: ", dados);// Verifica se o método ToString contém a string ""
         }
 
     }
