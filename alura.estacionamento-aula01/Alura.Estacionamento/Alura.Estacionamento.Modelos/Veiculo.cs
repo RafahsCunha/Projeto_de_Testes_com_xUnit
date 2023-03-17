@@ -67,7 +67,22 @@ namespace Alura.Estacionamento.Modelos
         public string Modelo { get; set; }        
         public string Proprietario
         {
-            get; set;
+            get 
+            {   
+                return _proprietario;
+            } 
+            set 
+            {   
+                if(value.Length < 3)
+                {
+                    throw new System.FormatException("Nome de proprietário inválido");
+                }
+                else
+                {
+                    _proprietario = value;
+
+                }
+            }
         }
         public DateTime HoraEntrada { get; set; }
         public DateTime HoraSaida { get; set; }   
@@ -87,14 +102,13 @@ namespace Alura.Estacionamento.Modelos
         //Construtor
         public Veiculo()
         {
-
+            
         }
 
         public Veiculo(string proprietario)
         {
-           Proprietario = proprietario;
+           this.Proprietario = proprietario;
         }
-
 
         public void AlterarDados(Veiculo veiculoAlterado)
         {

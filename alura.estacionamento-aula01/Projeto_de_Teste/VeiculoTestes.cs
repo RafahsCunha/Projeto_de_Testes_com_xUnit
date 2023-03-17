@@ -82,5 +82,33 @@ namespace Projeto_de_Teste
             Assert.Contains("Placa: ", dados);// Verifica se o método ToString contém a string ""
         }
 
+
+        // TESTANDO UMA EXCEÇÃO
+        [Fact]
+        public void TestaNomeVeiculoComMenosDeTresCaracteres()
+        {
+            //Arrange
+            string nomeProprietario = "ab";
+            //Assert
+            Assert.Throws<System.FormatException>( //Assert.Thorws método para testar uma exceção, <System.FormatException> tipo da exceção que será testada
+            //Act    
+            ()=> new Veiculo(nomeProprietario)); // Passa para o construtor Veiculo a variável com o nome do proprietário
+        }
+
+        [Fact]
+        public void TestaMensagemDeExcecaoDoQuartoCaracterDaPlaca()
+        {
+            //Arrange
+            string placa = "qwer1313";
+            
+            //Act
+            var mensagem = Assert.Throws<FormatException>(
+                ()=> new Veiculo().Placa = placa
+            );
+
+            //Assert
+            Assert.Equal("O 4° caractere deve ser um hífen", mensagem.Message);
+        }
+
     }
 }
