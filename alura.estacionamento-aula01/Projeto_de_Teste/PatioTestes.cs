@@ -80,7 +80,7 @@ namespace Projeto_de_Teste
 
         [Theory(DisplayName ="Teste nº 4")]
         [InlineData("Rogerio Lisboa", "PYO-4566", "Vermelho", "Tiguan")]
-        public void ConsultaVeiculoEstacionado(string proprietario, string placa, string cor, string modelo)
+        public void LocalizaVeiculoEstacionadoComBaseNoIdDoTicket(string proprietario, string placa, string cor, string modelo)
         {
             //Arrenge
             //var veiculo = new Veiculo();
@@ -93,10 +93,10 @@ namespace Projeto_de_Teste
             estacionamento.RegistrarEntradaVeiculo(veiculo);
 
             //Act
-            var consulta = estacionamento.PesquisaVeiculo(placa);
+            var consulta = estacionamento.PesquisaVeiculo(veiculo.IdTicket);
 
             //Assert
-            Assert.Equal(placa, consulta.Placa);
+            Assert.Contains("### Ticket Estacionamento Alura ###", consulta.Ticket);
         }
 
         [Fact]

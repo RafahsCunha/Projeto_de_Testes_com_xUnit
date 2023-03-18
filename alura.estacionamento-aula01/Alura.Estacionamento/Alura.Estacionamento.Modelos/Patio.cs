@@ -3,6 +3,7 @@ using Alura.Estacionamento.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace Alura.Estacionamento.Modelos
 
         public void RegistrarEntradaVeiculo(Veiculo veiculo)
         {
+            this.GerarTicket(veiculo);
             veiculo.HoraEntrada = DateTime.Now;            
             this.Veiculos.Add(veiculo);            
         }
@@ -83,11 +85,11 @@ namespace Alura.Estacionamento.Modelos
             return informacao;
         }
 
-        public Veiculo PesquisaVeiculo(string placa)
+        public Veiculo PesquisaVeiculo(string idTicket)
         {
             // Consulta Linq do .Net
             var encontrado = (from veiculo in this.Veiculos
-                              where veiculo.Placa == placa
+                              where veiculo.IdTicket == idTicket
                               select veiculo).SingleOrDefault();
             return encontrado;
         }
@@ -99,6 +101,20 @@ namespace Alura.Estacionamento.Modelos
                                select veiculo).SingleOrDefault();
             veiculoTemp.AlterarDados(veiculoAlterado);
             return veiculoTemp;
+        }
+
+        private string GerarTicket (Veiculo veiculo)
+        {
+            veiculo.IdTicket = new Guid().ToString().Substring(0, 5); // Guid() gera uma sequancia numera de até 128 numeros, ToString() converte essa sequencia para o tipo string, Substring(0,5) usa as strings do parâmetro 0 até 5
+           
+            string ticket = "### Ticket Estacionamento Alura ###" +
+                $">>> Identificador: {veiculo.IdTicket}" +  
+                $">>> Data/Hora de Entrada: {DateTime.Now}" +
+                $">>> Placa do Veículo: {veiculo.Placa}";
+
+            veiculo.Ticket = ticket;
+
+            return ticket;
         }
     }
 }
