@@ -114,7 +114,7 @@ namespace Alura.Estacionamento.Modelos
            this.Proprietario = proprietario;
         }
 
-        public void AlterarDados(Veiculo veiculoAlterado)
+        internal void AlterarDados(Veiculo veiculoAlterado)
         {
             this.Proprietario = veiculoAlterado.Proprietario;
             this.Modelo = veiculoAlterado.Modelo;

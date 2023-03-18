@@ -17,6 +17,7 @@ namespace Projeto_de_Teste
         // Configuração do Setup - preparação do cenário de testes
         private Patio estacionamento;
         private Veiculo veiculo;
+        private Operador operador;
         public ITestOutputHelper saidaDadosConcole;//atributo para mensagem de teste no gerenciador de testes 
         public PatioTestes(ITestOutputHelper _saidaDadosConcole)//Construtor
         {
@@ -24,6 +25,10 @@ namespace Projeto_de_Teste
             saidaDadosConcole.WriteLine("Construtor Invocado!!!!");
             estacionamento = new Patio();
             veiculo = new Veiculo();
+
+            operador = new Operador();
+            operador.Nome = " João Neto Solimões";
+            
         }
         [Fact]
         public void ValidaFaturamentoDoEstacionamento()
@@ -32,6 +37,9 @@ namespace Projeto_de_Teste
 
             // Arrange
             //var estacionamento = new Patio();
+
+            estacionamento.OperadorPatio = operador;
+
             //var veiculo = new Veiculo();
             veiculo.Proprietario = "Rafael Henrique";
             veiculo.Tipo = TipoVeiculo.Automovel;
@@ -60,7 +68,8 @@ namespace Projeto_de_Teste
         public void ValidaFaturamentoDeVariosVeiculos(string proprietario, string placa, string cor, string modelo)
         {
             //Arrenge
-           // var veiculo = new Veiculo();
+            estacionamento.OperadorPatio = operador;
+            // var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Placa = placa;
             veiculo.Cor = cor;
@@ -83,6 +92,7 @@ namespace Projeto_de_Teste
         public void LocalizaVeiculoEstacionadoComBaseNoIdDoTicket(string proprietario, string placa, string cor, string modelo)
         {
             //Arrenge
+            estacionamento.OperadorPatio = operador;
             //var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Placa = placa;
@@ -103,6 +113,7 @@ namespace Projeto_de_Teste
         public void AlteraDadosDoVeiculo()
         {
             // Arrange
+            estacionamento.OperadorPatio = operador;
             //var veiculo = new Veiculo();
             veiculo.Proprietario = "Roger Guedes";
             veiculo.Placa = "QWE-7894";

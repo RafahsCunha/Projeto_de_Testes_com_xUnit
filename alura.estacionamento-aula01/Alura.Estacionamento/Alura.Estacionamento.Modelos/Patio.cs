@@ -26,6 +26,9 @@ namespace Alura.Estacionamento.Modelos
             return this.Faturado;
         }
 
+        private Operador _operadorPatio;
+        public Operador OperadorPatio { get => _operadorPatio; set => _operadorPatio = value; }
+
         public string MostrarFaturamento()
         {
             string totalfaturado = String.Format("Total faturado até o momento :::::::::::::::::::::::::::: {0:c}", this.TotalFaturado());
@@ -102,7 +105,7 @@ namespace Alura.Estacionamento.Modelos
             veiculoTemp.AlterarDados(veiculoAlterado);
             return veiculoTemp;
         }
-
+   
         private string GerarTicket (Veiculo veiculo)
         {
             veiculo.IdTicket = new Guid().ToString().Substring(0, 5); // Guid() gera uma sequancia numera de até 128 numeros, ToString() converte essa sequencia para o tipo string, Substring(0,5) usa as strings do parâmetro 0 até 5
@@ -110,7 +113,8 @@ namespace Alura.Estacionamento.Modelos
             string ticket = "### Ticket Estacionamento Alura ###" +
                 $">>> Identificador: {veiculo.IdTicket}" +  
                 $">>> Data/Hora de Entrada: {DateTime.Now}" +
-                $">>> Placa do Veículo: {veiculo.Placa}";
+                $">>> Placa do Veículo: {veiculo.Placa}" +
+                $">>> Operador do Patio: {this.OperadorPatio.Nome}";
 
             veiculo.Ticket = ticket;
 
